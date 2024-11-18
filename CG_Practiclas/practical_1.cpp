@@ -1,3 +1,5 @@
+// Develop a program to draw a triangle using OpenGL
+
 #include<GL/glut.h>
 
 void init(){
