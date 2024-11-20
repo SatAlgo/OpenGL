@@ -1,1 +1,7 @@
-test
+gedit file_name.asm
+
+nasm -f elf64 file_name.asm
+
+ld  -o file_name file_name.o
+
+-/file_name
