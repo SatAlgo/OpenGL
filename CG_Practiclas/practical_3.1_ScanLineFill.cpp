@@ -1,110 +1,83 @@
-#include <iostream>
-#include <algorithm>
+// Develop a program to fill the polygon using scan line algorithm
+
 #include <GL/glut.h>
 
-
-using namespace std;
-
-struct Point
-{
-    int x, y;
-};
-
-void drawHorizontalLine(int x1, int x2, int y)
-{
-    glBegin(GL_LINES);
-    glVertex2i(x1, y);
-    glVertex2i(x2, y);
-    glEnd();
-
+void init() {
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    gluOrtho2D(0, 500, 0, 500);
 }
 
-void scanlineFill(Point vertices[], int numVertices)
-{
-    int minY = vertices[0].y, maxY = vertices[0].y;
-
-
-    for (int i = 1; i < numVertices; ++i)
-    {
-        if (vertices[i].y < minY)
-            minY = vertices[i].y;
-        if (vertices[i].y > maxY)
-            maxY = vertices[i].y;
-    }
-
-
-    for (int y = minY; y <= maxY; ++y)
-    {
-
-        Point intersectPoints[100];
-        int numIntersects = 0;
-
-
-        for (int i = 0; i < numVertices; ++i)
-        {
-            Point p1 = vertices[i];
-            Point p2 = vertices[(i + 1) % numVertices];
-            Point intersect1, intersect2;
-
-            if ((p1.y <= y && p2.y > y) || (p2.y <= y && p1.y > y))
-            {
-
-                intersect1.x = static_cast<int>((y - p1.y) / static_cast<double>(p2.y - p1.y) * (p2.x - p1.x) + p1.x);
-                intersect1.y = y;
-                intersectPoints[numIntersects++] = intersect1;
-            }
-        }
-
-
-        sort(intersectPoints, intersectPoints + numIntersects, [](const Point &a, const Point &b)
-        {
-            return a.x < b.x;
-        });
-
-        for (int i = 0; i < numIntersects; i += 2)
-        {
-            drawHorizontalLine(intersectPoints[i].x, intersectPoints[i + 1].x, y);
-
-        }
-
-    }
-}
-
-void display()
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1, 0, 0);
-
-    Point vertices[] = {{150, 100}, {300, 300}, {450, 100}};
-    int numVertices = sizeof(vertices) / sizeof(vertices[0]);
-
-    glBegin(GL_LINE_LOOP);
-    for (int i = 0; i < numVertices; ++i)
-        glVertex2i(vertices[i].x, vertices[i].y);
+void setPixel(int x, int y, float r, float g, float b) {
+    glColor3f(r, g, b);
+    glBegin(GL_POINTS);
+    glVertex2i(x, y);
     glEnd();
-
-    glColor3f(0, 0, 1);
-
-    scanlineFill(vertices, numVertices);
-
     glFlush();
 }
 
-void init()
-{
-    glMatrixMode(GL_PROJECTION);
-    glOrtho(0, 640, 0, 480, -1, 1);
+void scanLineFill(int y, int edges[][2], int edgeCount, float fillColor[3]) {
+    int intersections[10], count = 0;
+
+    // Find intersections for the current scan line
+    for (int i = 0; i < edgeCount; i++) {
+        int x1 = edges[i][0], y1 = edges[i][1];
+        int x2 = edges[(i + 1) % edgeCount][0], y2 = edges[(i + 1) % edgeCount][1];
+
+        if ((y1 <= y && y2 > y) || (y2 <= y && y1 > y)) {
+            intersections[count++] = x1 + (y - y1) * (x2 - x1) / (y2 - y1);
+        }
+    }
+
+    // Sort intersections
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (intersections[j] > intersections[j + 1]) {
+                int temp = intersections[j];
+                intersections[j] = intersections[j + 1];
+                intersections[j + 1] = temp;
+            }
+        }
+    }
+
+    // Fill pixels between pairs of intersections
+    for (int i = 0; i < count; i += 2) {
+        for (int x = intersections[i]; x <= intersections[i + 1]; x++) {
+            setPixel(x, y, fillColor[0], fillColor[1], fillColor[2]);
+        }
+    }
 }
 
-int main(int argc, char** argv)
-{
+void drawPolygon() {
+    glColor3f(1.0, 0.0, 0.0);
+    glBegin(GL_LINE_LOOP);
+    glVertex2i(250, 400);
+    glVertex2i(150, 200);
+    glVertex2i(350, 200);
+    glEnd();
+    glFlush();
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    drawPolygon();
+
+    float fillColor[] = {0.0, 0.0, 1.0};
+    int edges[][2] = {{250, 400}, {150, 200}, {350, 200}};
+    int edgeCount = 3;
+
+    for (int y = 200; y <= 400; y++) {
+        scanLineFill(y, edges, edgeCount, fillColor);
+    }
+}
+
+int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(640, 480);
-    glutInitWindowPosition(200, 200);
-    glutCreateWindow("Scanline Fill");
-    glutDisplayFunc(display);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Scan Line Fill - Triangle");
     init();
+    glutDisplayFunc(display);
     glutMainLoop();
     return 0;
 }
