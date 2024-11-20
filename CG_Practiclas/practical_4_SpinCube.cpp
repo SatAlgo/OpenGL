@@ -116,7 +116,7 @@ void displayMe(void)
 
     drawCube();
 
-    angle += 0.5;
+    angle += 0.1;
 
     glFlush();
 
