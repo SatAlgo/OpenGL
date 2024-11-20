@@ -1,6 +1,9 @@
 // Draw a color cube and spin it using OpenGL transformation matrices.
 
 
+// Draw a color cube and spin it using OpenGL transformation matrices.
+
+
 #include <GL/glut.h>
 #include <math.h>
 
@@ -37,68 +40,58 @@ void drawCube()
 
     rotateCube();
 
-    glBegin(GL_TRIANGLES);
-
     // Front face
-    glColor3f(1.0, 0.0, 0.0);//red
-    glVertex3fv(v0);
-    glVertex3fv(v1);
-    glVertex3fv(v2);
-
-    glVertex3fv(v2);
-    glVertex3fv(v3);
-    glVertex3fv(v0);
+    glBegin(GL_QUADS); // Define a quadrilateral
+    glColor3f(1.0, 0.0, 0.0); // Set color to red
+    glVertex3fv(v0);          // Bottom-left
+    glVertex3fv(v1);          // Bottom-right
+    glVertex3fv(v2);          // Top-right
+    glVertex3fv(v3);          // Top-left
+    glEnd();
 
     // Right face
-    glColor3f(0.0, 1.0, 0.0);//green
-    glVertex3fv(v0);
-    glVertex3fv(v3);
-    glVertex3fv(v4);
-
-    glVertex3fv(v4);
-    glVertex3fv(v5);
-    glVertex3fv(v0);
+    glBegin(GL_QUADS);
+    glColor3f(0.0, 1.0, 0.0); // Set color to green
+    glVertex3fv(v1);          // Bottom-left
+    glVertex3fv(v6);          // Bottom-right
+    glVertex3fv(v7);          // Top-right
+    glVertex3fv(v2);          // Top-left
+    glEnd();
 
     // Top face
-    glColor3f(0.0, 0.0, 1.0);//blue
-    glVertex3fv(v0);
-    glVertex3fv(v5);
-    glVertex3fv(v6);
-
-    glVertex3fv(v6);
-    glVertex3fv(v1);
-    glVertex3fv(v0);
+    glBegin(GL_QUADS);
+    glColor3f(0.0, 0.0, 1.0); // Set color to blue
+    glVertex3fv(v3);          // Bottom-left
+    glVertex3fv(v2);          // Bottom-right
+    glVertex3fv(v7);          // Top-right
+    glVertex3fv(v4);          // Top-left
+    glEnd();
 
     // Back face
-    glColor3f(1.0, 1.0, 0.0);//yellow
-    glVertex3fv(v1);
-    glVertex3fv(v6);
-    glVertex3fv(v7);
-
-    glVertex3fv(v7);
-    glVertex3fv(v2);
-    glVertex3fv(v1);
+    glBegin(GL_QUADS);
+    glColor3f(1.0, 1.0, 0.0); // Set color to yellow
+    glVertex3fv(v5);          // Bottom-left
+    glVertex3fv(v6);          // Bottom-right
+    glVertex3fv(v7);          // Top-right
+    glVertex3fv(v4);          // Top-left
+    glEnd();
 
     // Left face
-    glColor3f(0.0, 1.0, 1.0);//Teal
-    glVertex3fv(v7);
-    glVertex3fv(v4);
-    glVertex3fv(v3);
-
-    glVertex3fv(v3);
-    glVertex3fv(v2);
-    glVertex3fv(v7);
+    glBegin(GL_QUADS);
+    glColor3f(0.0, 1.0, 1.0); // Set color to cyan
+    glVertex3fv(v0);          // Bottom-left
+    glVertex3fv(v5);          // Bottom-right
+    glVertex3fv(v4);          // Top-right
+    glVertex3fv(v3);          // Top-left
+    glEnd();
 
     // Bottom face
-    glColor3f(1.0, 0.0, 1.0);//purple
-    glVertex3fv(v4);
-    glVertex3fv(v7);
-    glVertex3fv(v6);
-
-    glVertex3fv(v6);
-    glVertex3fv(v5);
-    glVertex3fv(v4);
-
+    glBegin(GL_QUADS);
+    glColor3f(1.0, 0.0, 1.0); // Set color to magenta
+    glVertex3fv(v0);          // Bottom-left
+    glVertex3fv(v1);          // Bottom-right
+    glVertex3fv(v6);          // Top-right
+    glVertex3fv(v5);          // Top-left
     glEnd();
 
 }
