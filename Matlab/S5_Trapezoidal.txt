@@ -1,0 +1,74 @@
+### Practical 5: Numerical Integration Using Trapezoidal, Simpson's 1/3 Rule, and Simpson's 3/8 Rule
+
+#### Objective:
+This practical aims to teach you how to approximate the definite integral of a function using three common numerical methods: the **Trapezoidal Rule**, **Simpson’s 1/3 Rule**, and **Simpson’s 3/8 Rule**. These methods are useful when it's difficult or impossible to compute the integral analytically.
+
+---
+
+### **What is Numerical Integration?**
+Numerical integration is a technique used to estimate the area under a curve when the exact integral is hard to find. It approximates the integral by dividing the area into smaller, simpler shapes, such as rectangles or trapezoids, and summing their areas.
+
+---
+
+### **Methods of Numerical Integration**
+
+1. **Trapezoidal Rule**:
+   - **Concept**: This method approximates the area under the curve by dividing the area into trapezoids (instead of rectangles) between consecutive points.
+   - **Formula**: 
+     \[
+     \int_a^b f(x) \, dx \approx \frac{h}{2} \left( f(a) + 2 \sum_{i=1}^{n-1} f(x_i) + f(b) \right)
+     \]
+     Where \(h\) is the width of each subinterval, and \(f(x)\) is the function to be integrated.
+   - **Usage**: It's simple but less accurate compared to other methods.
+
+2. **Simpson’s 1/3 Rule**:
+   - **Concept**: This method approximates the area under the curve using parabolic (quadratic) interpolation between points, which tends to be more accurate than linear methods like the Trapezoidal Rule.
+   - **Formula**: 
+     \[
+     \int_a^b f(x) \, dx \approx \frac{h}{3} \left( f(a) + 4 \sum_{i \, \text{odd}} f(x_i) + 2 \sum_{i \, \text{even}} f(x_i) + f(b) \right)
+     \]
+     Where \(h\) is the width of each subinterval, and \(n\) must be even.
+   - **Usage**: This method gives a better approximation for smooth functions.
+
+3. **Simpson’s 3/8 Rule**:
+   - **Concept**: This is a variant of Simpson's 1/3 Rule, which is often more accurate for certain types of functions. It uses cubic interpolation instead of quadratic interpolation.
+   - **Formula**: 
+     \[
+     \int_a^b f(x) \, dx \approx \frac{3h}{8} \left( f(a) + 3 \sum_{i \, \text{odd}} f(x_i) + 3 \sum_{i \, \text{even}} f(x_i) + f(b) \right)
+     \]
+   - **Usage**: It’s more accurate for functions that behave in a smoother, cubic manner.
+
+---
+
+### **Steps for the Practical**
+
+1. **Given Function**: 
+   - You will be provided with a mathematical function (like \(f(x) = \sin(x)\) or any other function you need to integrate).
+
+2. **Limits of Integration**:
+   - The integration will be done over a specified interval, for example, from \(a = 0\) to \(b = \pi\).
+
+3. **Subintervals (n)**:
+   - Choose the number of subintervals \(n\). A higher \(n\) will give a more accurate result but will also require more calculations.
+
+4. **Apply Methods**:
+   - Use each of the three methods (Trapezoidal, Simpson’s 1/3, and Simpson’s 3/8) to approximate the integral of the function over the given interval.
+
+5. **Compare Results**:
+   - Compare the results from the three methods to see how close each method comes to the exact integral.
+
+---
+
+### **Why Use These Methods?**
+- **Efficiency**: Sometimes finding the exact integral of a function is complicated or impossible. These methods provide quick approximations.
+- **Flexibility**: These methods can be applied to a wide range of functions, whether the exact solution is known or not.
+- **Accuracy**: While the Trapezoidal Rule is simple, Simpson’s 1/3 Rule and Simpson’s 3/8 Rule often provide better accuracy, especially for smooth functions.
+
+---
+
+### **Conclusion**:
+In this practical, you:
+- Learned how to implement and use three numerical methods for integration.
+- Gained insights into how numerical methods approximate the area under a curve.
+- Compared the accuracy of these methods and understood when each might be appropriate to use.
+
