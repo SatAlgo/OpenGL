@@ -1,0 +1,76 @@
+### Practical 3: Laplace Transforms and Solution of Differential Equations Using Laplace Transforms
+
+**Objective**: 
+- To find the Laplace transform of given functions.
+- To solve differential equations using Laplace transforms.
+- To explore row spaces in matrices.
+
+---
+
+### **1. Laplace Transforms**:
+The Laplace transform is a powerful integral transform used to convert time-domain functions (typically involving differential equations) into frequency-domain functions. It is particularly useful in the analysis and solution of linear ordinary differential equations (ODEs). 
+
+- **Definition**: The standard Laplace transform of a function \( f(t) \) is given by:
+  
+  \[
+  \mathcal{L}\{f(t)\} = F(s) = \int_{0}^{\infty} e^{-st} f(t) \, dt
+  \]
+
+- **Common Laplace Transforms**:
+  - \( \mathcal{L}\{1\} = \frac{1}{s} \)
+  - \( \mathcal{L}\{t^n\} = \frac{n!}{s^{n+1}} \)
+  - \( \mathcal{L}\{e^{at}\} = \frac{1}{s-a} \)
+  - \( \mathcal{L}\{\sin(at)\} = \frac{a}{s^2 + a^2} \)
+  - \( \mathcal{L}\{\cos(at)\} = \frac{s}{s^2 + a^2} \)
+
+#### **Steps to Find Laplace Transforms**:
+1. Identify the function \( f(t) \) whose Laplace transform is needed.
+2. Use standard formulas to calculate the Laplace transform for simple functions like polynomials, exponential functions, trigonometric functions, etc.
+3. In MATLAB, the `laplace` function is typically used to calculate the Laplace transform of a given function.
+
+---
+
+### **2. Solving Differential Equations Using Laplace Transforms**:
+The Laplace transform is especially useful in solving linear differential equations with constant coefficients. By transforming a differential equation into an algebraic equation in the \( s \)-domain, the solution becomes much easier to find.
+
+#### **Steps to Solve Differential Equations**:
+1. **Take the Laplace Transform of Both Sides**: For example, for a second-order linear differential equation such as:
+   \[
+   y''(t) - 3y'(t) + 2y(t) = 0
+   \]
+   Apply the Laplace transform to each term, using the properties of Laplace transforms for derivatives:
+   - \( \mathcal{L}\{y'(t)\} = sY(s) - y(0) \)
+   - \( \mathcal{L}\{y''(t)\} = s^2Y(s) - sy(0) - y'(0) \)
+
+2. **Solve the Resulting Algebraic Equation**: After transforming the differential equation into the \( s \)-domain, solve for \( Y(s) \), the Laplace transform of the solution.
+
+3. **Inverse Laplace Transform**: Once \( Y(s) \) is found, the solution \( y(t) \) is obtained by taking the inverse Laplace transform of \( Y(s) \).
+
+4. **Initial Conditions**: Initial conditions, such as \( y(0) \) and \( y'(0) \), are used to solve for the constants in the solution.
+
+---
+
+### **3. Row Spaces of Matrices**:
+The row space of a matrix is the set of all possible linear combinations of its row vectors. It is an important concept in linear algebra and is used in solving systems of linear equations, understanding matrix rank, and studying the structure of matrices.
+
+#### **Key Points About Row Spaces**:
+- **Row Vectors**: The row vectors of a matrix are the horizontal arrays of numbers within the matrix. For example, in the matrix \( A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \), the row vectors are \( [1, 2, 3] \), \( [4, 5, 6] \), and \( [7, 8, 9] \).
+  
+- **Linearly Independent Rows**: The row space of a matrix is composed of the linearly independent row vectors. The number of linearly independent rows is referred to as the rank of the matrix.
+
+- **Row Space and Linear Systems**: The row space is important in solving linear systems because the solution space of a system of linear equations is closely related to the row space of the augmented matrix.
+
+#### **Steps to Find Row Space**:
+1. Construct the matrix for which you want to compute the row space.
+2. Identify the linearly independent rows by performing row reduction (e.g., Gaussian elimination).
+3. The row space is spanned by these linearly independent rows.
+
+---
+
+### **Conclusion**:
+In this practical, you are expected to:
+- Calculate Laplace transforms of different functions.
+- Solve linear differential equations using Laplace transforms.
+- Explore the row space of matrices to understand their structure and solve linear systems more effectively. 
+
+These concepts form the foundation for many engineering applications, particularly in control systems, signal processing, and numerical analysis.
