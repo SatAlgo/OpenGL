@@ -54,11 +54,9 @@ bool isSafe(int a[N][N], int row, int col, int num) {
     return !usedinRow(a, row, num) && !usedinCol(a, col, num) && !usedinBox(a, row - row % 2, col - col % 2, num);
 }
 
-// Solve the Sudoku using Backtracking
 bool solveSudoku(int a[N][N]) {
     int row, col;
 
-    // Find the next vacant cell
     bool empty = true;
     for (row = 0; row < N; row++) {
         for (col = 0; col < N; col++) {
@@ -70,19 +68,19 @@ bool solveSudoku(int a[N][N]) {
         if (!empty) break;
     }
 
-    if (empty) return true;  // If no empty cell is found, we're done.
+    if (empty) return true;
 
     for (int num = 1; num <= N; num++) {
         if (isSafe(a, row, col, num)) {
-            a[row][col] = num;  // Try this number
+            a[row][col] = num;
             if (solveSudoku(a)) {
-                return true;  // If successful, return true
+                return true;
             }
-            a[row][col] = vacant;  // Backtrack
+            a[row][col] = vacant;
         }
     }
 
-    return false;  // Trigger backtracking
+    return false;
 }
 
 int main() {
