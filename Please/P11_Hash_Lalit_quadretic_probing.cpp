@@ -90,3 +90,5 @@ int main() {
     return 0;
 }
 
+
+// TC = O(n) in worst case
