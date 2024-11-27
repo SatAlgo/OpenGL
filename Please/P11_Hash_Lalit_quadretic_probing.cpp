@@ -6,6 +6,11 @@ using namespace std;
 /*
  * Hash Table class with Quadratic Probing
  */
+
+/* new index = (original index + i^2) % table size
+where i starts from 1 and increases until an empty slot is found.
+*/
+
 class HashTable {
 private:
     int TABLE_SIZE = 11;                 // Size of the hash table (11 slots)
