@@ -5,7 +5,7 @@ class Node {
 public:
     int billNo;
     string customerName;
-    vector<pair<string, double> > items; // Pair of item name and price
+    vector<pair<string, double> > items;
     double totalAmount;
     Node* next;
 };
