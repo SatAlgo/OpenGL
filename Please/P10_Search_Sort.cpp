@@ -11,7 +11,6 @@ struct Student {
     Student(int r, string n, float s, string d) : rollNo(r), name(n), sgpa(s), department(d) {}
 };
 
-// Function to implement Bubble Sort based on Roll Number
 void bubbleSort(vector<Student>& students) {
     int n = students.size();
     for (int i = 0; i < n - 1; i++) {
@@ -23,7 +22,6 @@ void bubbleSort(vector<Student>& students) {
     }
 }
 
-// Function to implement Insertion Sort based on Student Names (Alphabetical Order)
 void insertionSort(vector<Student>& students) {
     int n = students.size();
     for (int i = 1; i < n; i++) {
@@ -37,7 +35,6 @@ void insertionSort(vector<Student>& students) {
     }
 }
 
-// Quick Sort Helper Functions (For Sorting by SGPA)
 int partition(vector<Student>& students, int low, int high) {
     float pivot = students[high].sgpa;
     int i = low - 1;
@@ -59,7 +56,6 @@ void quickSort(vector<Student>& students, int low, int high) {
     }
 }
 
-// Linear Search to find students by SGPA
 void linearSearchBySGPA(const vector<Student>& students, float searchSGPA) {
     bool found = false;
     for (const auto& student : students) {
@@ -73,7 +69,6 @@ void linearSearchBySGPA(const vector<Student>& students, float searchSGPA) {
     }
 }
 
-// Binary Search to find a student by Name (Non-Recursive)
 void binarySearchByName(vector<Student>& students, const string& searchName) {
     int low = 0, high = students.size() - 1;
     bool found = false;
@@ -94,12 +89,11 @@ void binarySearchByName(vector<Student>& students, const string& searchName) {
     }
 }
 
-// Fibonacci Search to check if student belongs to a specific department
 void fibonacciSearch(const vector<Student>& students, const string& department) {
     int n = students.size();
-    int fibM_minus_2 = 0; // (m-2)th Fibonacci number
-    int fibM_minus_1 = 1; // (m-1)th Fibonacci number
-    int fibM = fibM_minus_2 + fibM_minus_1; // mth Fibonacci number
+    int fibM_minus_2 = 0;
+    int fibM_minus_1 = 1;
+    int fibM = fibM_minus_2 + fibM_minus_1;
 
     while (fibM < n) {
         fibM_minus_2 = fibM_minus_1;
@@ -136,7 +130,7 @@ void fibonacciSearch(const vector<Student>& students, const string& department) 
 }
 
 int main() {
-    // Student records
+    
     vector<Student> students = {
         Student(1, "Alice", 8.5, "Computer"),
         Student(2, "Bob", 9.1, "Electrical"),
@@ -155,41 +149,41 @@ int main() {
         Student(15, "Oscar", 7.7, "Mechanical")
     };
 
-    // 1. Roll Call List - Bubble Sort by Roll Number
+    
     cout << "Roll Call List (Sorted by Roll No):" << endl;
     bubbleSort(students);
     for (const auto& student : students) {
         cout << student.rollNo << " " << student.name << " " << student.sgpa << " " << student.department << endl;
     }
 
-    // 2. Alphabetical List - Insertion Sort by Name
+    
     cout << "\nAlphabetical List (Sorted by Name):" << endl;
     insertionSort(students);
     for (const auto& student : students) {
         cout << student.name << " " << student.rollNo << " " << student.sgpa << " " << student.department << endl;
     }
 
-    // 3. Top Ten Toppers - Quick Sort by SGPA
+    
     cout << "\nTop Ten Toppers (Sorted by SGPA):" << endl;
     quickSort(students, 0, students.size() - 1);
     for (int i = 0; i < 10 && i < students.size(); i++) {
         cout << students[i].name << " " << students[i].sgpa << " " << students[i].department << endl;
     }
 
-    // 4. Search by SGPA (Linear Search)
+    
     cout << "\nSearch Students by SGPA (Enter SGPA to search): ";
     float searchSGPA;
     cin >> searchSGPA;
     linearSearchBySGPA(students, searchSGPA);
 
 
-    // 5. Search by Name (Binary Search)
+    
     cout << "\nSearch Student by Name (Enter Name to search): ";
     string searchName;
     cin >> searchName;
     binarySearchByName(students, searchName);
 
-    // 6. Fibonacci Search for 'Computer' Department
+    
     cout << "\nCheck if student belongs to Computer Department (Enter department): ";
     string department;
     cin >> department;
