@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MM 8  // Corrected macro definition
+#define MM 8  
 
 class node {
 public:
@@ -31,18 +31,18 @@ public:
 };
 
 void CLL::addOrder(int x) {
-    node *temp = new node(x);  // Create a new node
+    node *temp = new node(x);
 
-    if (head == NULL) {  // If the list is empty
+    if (head == NULL) {
         head = temp;
-        temp->next = head;  // Circular link
+        temp->next = head;
     } else {
         node *last = head;
-        while (last->next != head) {  // Traverse to the last node
+        while (last->next != head) {
             last = last->next;
         }
-        last->next = temp;  // Link last node to the new node
-        temp->next = head;  // Circular link to head
+        last->next = temp;
+        temp->next = head;
     }
     count++;
 }
@@ -54,17 +54,17 @@ void CLL::serveOrder() {
     }
 
     node *temp = head;
-    if (head->next == head) {  // If there's only one order
+    if (head->next == head) {
         head = NULL;
     } else {
         node *last = head;
-        while (last->next != head) {  // Traverse to the last node
+        while (last->next != head) {
             last = last->next;
         }
-        last->next = head->next;  // Skip the head node
-        head = head->next;  // Update head to the next order
+        last->next = head->next;
+        head = head->next;
     }
-    delete temp;  // Free the memory
+    delete temp;
     count--;
 }
 
@@ -78,7 +78,7 @@ void CLL::display() {
     do {
         cout << "Order ID: " << temp->orderno << endl;
         temp = temp->next;
-    } while (temp != head);  // Loop until we return to the head
+    } while (temp != head);
 }
 
 int main() {
@@ -86,7 +86,7 @@ int main() {
     int choice, orderId;
 
     do {
-        // Menu-driven interface
+        
         cout << "\nMenu:\n";
         cout << "1. Add Order\n";
         cout << "2. Serve Order\n";
@@ -97,30 +97,30 @@ int main() {
 
         switch(choice) {
             case 1:
-                // Add an order
+                
                 cout << "Enter order ID to add: ";
                 cin >> orderId;
                 orders.addOrder(orderId);
                 cout << "Order " << orderId << " added successfully.\n";
                 break;
             case 2:
-                // Serve an order
+                
                 orders.serveOrder();
                 cout << "First order served.\n";
                 break;
             case 3:
-                // Display all orders
+                
                 cout << "Displaying all orders:\n";
                 orders.display();
                 break;
             case 4:
-                // Exit the program
+                
                 cout << "Exiting the program.\n";
                 break;
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
-    } while(choice != 4);  // Repeat until user chooses to exit
+    } while(choice != 4);
 
     return 0;
 }
