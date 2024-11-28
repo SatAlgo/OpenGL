@@ -4,9 +4,9 @@ using namespace std;
 
 class HashTable {
 private:
-    int* htable; // Array to store the keys
-    int* values; // Array to store the values
-    bool* isOccupied; // Array to track if a slot is occupied
+    int* htable;
+    int* values;
+    bool* isOccupied;
 
 public:
     HashTable() {
@@ -14,8 +14,8 @@ public:
         values = new int[TABLE_SIZE];
         isOccupied = new bool[TABLE_SIZE];
         for (int i = 0; i < TABLE_SIZE; i++) {
-            htable[i] = -1; // Initialize keys to -1 to indicate empty slots
-            values[i] = 0; // Initialize values to 0
+            htable[i] = -1;
+            values[i] = 0;
             isOccupied[i] = false;
         }
     }
@@ -26,21 +26,17 @@ public:
         delete[] isOccupied;
     }
 
-    /*
-     * Hash Function
-     */
+    
     int HashFunc(int key) {
         return key % TABLE_SIZE;
     }
 
-    /*
-     * Insert Element
-     */
+    
     void Insert(int key, int value) {
         int hash_val = HashFunc(key);
         int original_hash = hash_val;
 
-        // Linear probing to find an empty slot
+       
         while (isOccupied[hash_val]) {
             hash_val = (hash_val + 1) % TABLE_SIZE;
             if (hash_val == original_hash) {
@@ -55,14 +51,12 @@ public:
         cout << "Key " << key << " inserted at index " << hash_val << endl;
     }
 
-    /*
-     * Remove Element
-     */
+    
     void Remove(int key) {
         int hash_val = HashFunc(key);
         int original_hash = hash_val;
 
-        // Linear probing to find the key
+        
         while (isOccupied[hash_val] && htable[hash_val] != key) {
             hash_val = (hash_val + 1) % TABLE_SIZE;
             if (hash_val == original_hash) {
@@ -79,14 +73,12 @@ public:
         }
     }
 
-    /*
-     * Search Element
-     */
+    
     int Search(int key) {
         int hash_val = HashFunc(key);
         int original_hash = hash_val;
 
-        // Linear probing to find the key
+        
         while (isOccupied[hash_val] && htable[hash_val] != key) {
             hash_val = (hash_val + 1) % TABLE_SIZE;
             if (hash_val == original_hash) {
@@ -105,9 +97,7 @@ public:
     }
 };
 
-/*
- * Main Contains Menu
- */
+
 int main() {
     HashTable hash;
     int key, value;
