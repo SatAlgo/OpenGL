@@ -8,7 +8,7 @@ public:
     int age;
     string destination;
     string travelDate;
-    string seatClass; // e.g., First, Second, Sleeper
+    string seatClass;
     Node* next;
 };
 
