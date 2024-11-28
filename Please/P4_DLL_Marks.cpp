@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Doubly Linked List Node Class
+
 class node {
 public:
     int rno;
@@ -11,7 +11,7 @@ public:
     node* prev;
 };
 
-// Doubly Linked List Class
+
 class DLL {
     node* head;
 
@@ -28,7 +28,7 @@ public:
 
 void DLL::create() {
     node* last = NULL;
-    char choice = 'Y';  // using 'Y' or 'N' for input
+    char choice = 'Y';
     do {
         node* temp = new node;
         cout << "Enter roll number, Name, Marks: ";
@@ -85,7 +85,7 @@ void DLL::merge(DLL& D1, DLL& D2) {
     p = D1.head;
     q = D2.head;
 
-    // Start with the smaller of the first two elements
+    
     if (p->marks <= q->marks) {
         head = p;
         p = p->next;
@@ -123,19 +123,19 @@ void DLL::merge(DLL& D1, DLL& D2) {
 
 void DLL::sort() {
     if (head == NULL || head->next == NULL) {
-        return;  // List is already sorted
+        return;
     }
 
     node* i = head;
     node* j;
     node* temp;
     
-    // Bubble Sort on the list
+   
     while (i != NULL) {
         j = i->next;
         while (j != NULL) {
             if (i->marks > j->marks) {
-                // Swap marks and rno
+                
                 temp = i;
                 i = j;
                 j = temp;
